@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions (FAQ)</title>
+    <style>
+        /* --- Basic Styling --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        /* --- Accordion Styling --- */
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+
+        .faq-question {
+            padding: 15px 0;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #333;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: #007bff;
+        }
+
+        .faq-icon {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        /* Rotates the icon when the answer is open */
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0; /* Initially hidden */
+            overflow: hidden;
+            padding: 0 15px;
+            background-color: #f9f9f9;
+            border-left: 3px solid #007bff;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+        }
+
+        /* Shows the answer */
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Adjust based on expected content size */
+            padding: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="faq-container">
+        <h1>Frequently Asked Questions</h1>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                What is the purpose of this website?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>This website serves as a simple demonstration of an **FAQ page** built using only **HTML, CSS, and basic JavaScript**. It utilizes the accordion pattern to hide and reveal answers, making the content easy to browse without cluttering the page.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                How is the open/close animation achieved?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>The open/close effect is handled primarily by **CSS** and a little **JavaScript**. The JavaScript toggles an <code>active</code> class on the item when the question is clicked. The CSS then uses the <code>max-height: 0;</code> property combined with the <code>transition</code> property to smoothly animate the answer's appearance when <code>max-height</code> is set to a larger value.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- JavaScript for Accordion Functionality ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+
+                question.addEventListener('click', () => {
+                    // Close any open answers (optional: allows only one open at a time)
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the 'active' class on the clicked item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
